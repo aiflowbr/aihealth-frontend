@@ -16,10 +16,11 @@ export default {
   data: () => ({ drawer: null, ws: null, ws_status: false, client_id: null }),
   methods: {
     connectWebSocket() {
-      var socket = new WebSocket("ws://localhost:8000/ws");
+      var socket = new WebSocket("ws://localhost:9088/ws");
 
       socket.onopen = (event) => {
         console.log("Conexão estabelecida com o servidor.");
+        window.WSBACKEND = socket;
         this.ws_status = true;
       };
 
@@ -45,7 +46,6 @@ export default {
   mounted() {
     console.log("Initializing communication");
     this.ws = this.connectWebSocket();
-    window.WSBACKEND = this.ws;
   },
 };
 </script>
@@ -64,7 +64,11 @@ export default {
 
     <v-app-bar v-if="$route.path !== '/'">
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title>AIHealth</v-app-bar-title>
+      <v-app-bar-title><div class="d-flex flex-row align-center">
+        <v-img width="42" class="flex-grow-0 pa-0 mr-3" src="./src/assets/aiflow_black.svg"></v-img>
+        AIHealth
+      </div>
+    </v-app-bar-title>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary v-if="$route.path !== '/'">
@@ -105,6 +109,9 @@ export default {
 </template>
 
 <style scoped>
+.bar_icon {
+  width: 30px !important;
+}
 .logo {
   height: 6em;
   padding: 1.5em;
