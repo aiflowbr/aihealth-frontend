@@ -8,7 +8,7 @@
    version="1.1"
    id="svg18019"
    sodipodi:docname="aiflow_black.svg"
-   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   inkscape:version="1.2 (dc2aeda, 2022-05-15)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,26 +25,22 @@
      showgrid="false"
      width="180mm"
      inkscape:zoom="0.75187991"
-     inkscape:cx="43.224988"
-     inkscape:cy="343.8049"
-     inkscape:window-width="1866"
-     inkscape:window-height="1016"
-     inkscape:window-x="54"
-     inkscape:window-y="27"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:cx="49.209986"
+     inkscape:cy="348.4599"
+     inkscape:window-width="1699"
+     inkscape:window-height="908"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     inkscape:showpageshadow="0"
+     inkscape:deskcolor="#d1d1d1" />
   <defs
      id="defs18016" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <circle
-       style="fill:#000000;stroke:none;stroke-width:14.5042;stroke-linecap:round;fill-opacity:0"
-       id="path19738"
-       cx="90"
-       cy="90"
-       r="90" />
     <path
        id="path19636"
        style="color:#000000;fill:#ffffff;stroke-width:1;stroke-linecap:round;-inkscape-stroke:none"

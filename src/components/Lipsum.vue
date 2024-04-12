@@ -1,8 +1,5 @@
 <template>
   <div>
-    <v-date-picker></v-date-picker>
-    <v-img src="./src/assets/aiflow_black.svg" width="100" height="100" aspect-ratio="1/1"></v-img>
-    <v-parallax src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-parallax>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis varius metus
     elit, eget porta ligula hendrerit bibendum. Donec gravida enim ut risus
     facilisis semper. Fusce cursus tellus sed orci eleifend condimentum.
@@ -192,9 +189,3 @@
     Mauris fringilla non arcu pharetra hendrerit.
   </div>
 </template>
-<script setup></script>
-<script>
-export default {
-  data: () => ({}),
-};
-</script>

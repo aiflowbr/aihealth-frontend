@@ -4,19 +4,25 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "NODE_OPTIONS='--no-warnings=ExperimentalWarning' vite --open --host",
+    "build": "NODE_OPTIONS='--no-warnings=ExperimentalWarning' vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
+    "apexcharts": "^3.48.0",
+    "pinia": "^2.1.7",
     "vue": "^3.3.11",
     "vue-router": "4",
+    "vue3-apexcharts": "^1.5.2",
     "vuetify": "^3.5.2",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@types/node": "^20.12.7",
     "@vitejs/plugin-vue": "^4.5.2",
+    "@vue/tsconfig": "^0.5.1",
+    "typescript": "^5.4.5",
     "vite": "^5.0.8",
     "vite-plugin-vuetify": "^2.0.1"
   }

@@ -24,7 +24,7 @@
           ></v-list-item>
           <v-list-item
             prepend-icon="mdi-import"
-            title="Inputs"
+            title="Input sources"
             value="inputs"
             to="/inputs"
           >
@@ -36,27 +36,27 @@
             to="/neuralnetworks"
           >
           </v-list-item>
-          <v-list-item
+          <!-- <v-list-item
             prepend-icon="mdi-expansion-card"
             title="Compute Nodes"
             value="compute"
             to="/compute"
           >
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item
             prepend-icon="mdi-export"
-            title="Outputs"
+            title="Output targets"
             value="outputs"
             to="/outputs"
           >
           </v-list-item>
-          <v-list-item
+          <!-- <v-list-item
             prepend-icon="mdi-database"
             title="Datasets"
             value="datasets"
             to="/datasets"
           >
-          </v-list-item>
+          </v-list-item> -->
           <v-list-item
             prepend-icon="mdi-graph-outline"
             title="Prediction flows"

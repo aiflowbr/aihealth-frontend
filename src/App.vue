@@ -3,10 +3,8 @@
 // import SystemBar from "./components/SystemBar.vue";
 </script> -->
 <script setup>
-import store from "./plugins/store";
 import { ref, onMounted } from "vue";
-import LeftMenu from "./components/LeftMenu.vue";
-// import InflowData from "./components/InflowData.vue";
+import LeftMenu from "@/components/LeftMenu.vue";
 const drawer = ref(null);
 onMounted(() => {});
 </script>
@@ -27,7 +25,6 @@ export default {
       socket.onmessage = (event) => {
         const msg = JSON.parse(event.data);
         console.log("Mensagem recebida do servidor:", msg);
-        store.dispatch("setComputeNodes", msg);
       };
 
       socket.onerror = (error) => {
@@ -63,12 +60,25 @@ export default {
     </v-system-bar>
 
     <v-app-bar v-if="$route.path !== '/'">
+      <template v-slot:image>
+        <v-img
+          gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
+        ></v-img>
+      </template>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title><div class="d-flex flex-row align-center">
-        <v-img width="42" class="flex-grow-0 pa-0 mr-3" src="./src/assets/aiflow_black.svg"></v-img>
-        AIHealth
-      </div>
-    </v-app-bar-title>
+
+      <v-img
+        width="42"
+        class="flex-grow-0 pa-0 ml-3"
+        src="./src/assets/aiflow_black.svg"
+      ></v-img>
+      <v-app-bar-title>AIHealth</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" temporary v-if="$route.path !== '/'">
@@ -77,7 +87,7 @@ export default {
     </v-navigation-drawer>
 
     <v-main class="d-flex">
-      <!-- <InflowData /> -->
+      <InflowData />
       <v-container class="d-flex">
         <router-view></router-view>
         <!-- <v-row>
