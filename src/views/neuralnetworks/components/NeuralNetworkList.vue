@@ -1,5 +1,5 @@
 <template>
-  <UiTitleCard title="Received data" class-name="px-0 pb-0 rounded-md">
+  <UiTitleCard title="Model list" class-name="px-0 pb-0 rounded-md">
     <v-table class="bordered-table" hover density="comfortable">
       <thead class="bg-containerBg">
         <tr>
@@ -7,22 +7,22 @@
             ID
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
-            Date
+            Title
+          </th>
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
+            Input Dimension
+          </th>
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
+            Type
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
-            Patient Name
-          </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
-            source
-          </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
-            Modality
+            Output Dimension
           </th>
         </tr>
       </thead>
@@ -30,22 +30,22 @@
         <tr v-for="item in projects" :key="item.name">
           <td class="py-3">
             <router-link
-              :to="'/inputs/' + item.id"
+              :to="'/neuralnetworks/' + item.number"
               class="text-primary link-hover"
-              >{{ item.id }}</router-link
+              >{{ item.number }}</router-link
             >
-          </td>
-          <td class="py-3">
-             {{ item.date }}
           </td>
           <td class="py-3">{{ item.name }}</td>
           <td class="py-3 text-right" style="min-width: 100px">
-            {{ item.source }}
+            {{ item.hostname }}
           </td>
           <td class="py-3 text-right" style="min-width: 100px">
             <v-chip size="small">
-              {{ item.modality}}
+              {{ item.interval }}
             </v-chip>
+          </td>
+          <td class="py-3">
+            {{ item.output_dimension }}
           </td>
         </tr>
       </tbody>
@@ -58,11 +58,11 @@ import UiTitleCard from "@/components/UiTitleCard.vue";
 import { shallowRef } from "vue";
 const projects = shallowRef([
   {
-    id: 1,
-    name: "Robot 123",
-    source: "ORTHANC",
-    modality: "DX",
-    date: "2024-04-12",
+    number: 1,
+    name: "CNN-VGG16-PNEUMONIA",
+    hostname: [224, 224, 3],
+    interval: "Classification",
+    output_dimension: [1, 1],
   },
 ]);
 </script>

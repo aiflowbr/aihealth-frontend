@@ -4,11 +4,11 @@ import User from "@/views/User.vue";
 import Dashboard from "@/views/dashboard/Dashboard.vue";
 import Accounts from "@/views/Accounts.vue";
 import Inputs from "@/views/inputs/Inputs.vue";
-import NeuralNetworks from "@/views/NeuralNetworks.vue";
+import NeuralNetworks from "@/views/neuralnetworks/NeuralNetworks.vue";
 // import Compute from "@/views/Compute.vue";
 // import Datasets from "@/views/Datasets.vue";
-import PredictionFlows from "@/views/PredictionFlows.vue";
-import Outputs from "@/views/Outputs.vue";
+import PredictionFlows from "@/views/flows/PredictionFlows.vue";
+import Outputs from "@/views/outputs/Outputs.vue";
 import Settings from "@/views/Settings.vue";
 
 export const router = createRouter({

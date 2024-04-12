@@ -28,7 +28,13 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref, onMounted } from "vue";
+// const el = ref()
+// onMounted(() => {
+//   console.log(ref);
+// })
+</script>
 
 <script>
 export default {
@@ -46,5 +52,8 @@ export default {
       this.$router.push("/dashboard");
     },
   },
+  mounted() {
+    console.log("LOGIN MOUNTED!")
+  }
 };
 </script>

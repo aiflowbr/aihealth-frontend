@@ -30,8 +30,8 @@
         <tr v-for="item in projects" :key="item.name">
           <td class="py-3">
             <router-link
-              to="/dashboard/default"
-              class="text-secondary link-hover"
+              :to="'/inputs/' + item.number"
+              class="text-primary link-hover"
               >{{ item.number }}</router-link
             >
           </td>

@@ -1,5 +1,5 @@
 <template>
-  <UiTitleCard title="Received data" class-name="px-0 pb-0 rounded-md">
+  <UiTitleCard title="Flows" class-name="px-0 pb-0 rounded-md">
     <v-table class="bordered-table" hover density="comfortable">
       <thead class="bg-containerBg">
         <tr>
@@ -7,44 +7,64 @@
             ID
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
-            Date
+            Source
+          </th>
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
+            Neural Network
+          </th>
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
+            Output
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
-            Patient Name
-          </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
-            source
-          </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
-            Modality
+            Status
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in projects" :key="item.name">
+        <tr v-for="item in flows" :key="item.id">
           <td class="py-3">
             <router-link
-              :to="'/inputs/' + item.id"
+              :to="'/flows/' + item.id"
               class="text-primary link-hover"
               >{{ item.id }}</router-link
             >
           </td>
+          <td class="py-3">{{ item.source }}</td>
+          <td class="py-3 text-right" style="min-width: 100px">
+            {{ item.neuralnetwork }}
+          </td>
+          <td class="py-3 text-right" style="min-width: 100px">
+            {{ item.output }}
+          </td>
           <td class="py-3">
-             {{ item.date }}
-          </td>
-          <td class="py-3">{{ item.name }}</td>
-          <td class="py-3 text-right" style="min-width: 100px">
-            {{ item.source }}
-          </td>
-          <td class="py-3 text-right" style="min-width: 100px">
-            <v-chip size="small">
-              {{ item.modality}}
+            <v-chip
+              variant="text"
+              size="small"
+              class="px-0"
+              v-if="item.status === 'active'"
+            >
+              <v-avatar
+                size="8"
+                color="success"
+                variant="flat"
+                class="mr-2"
+              ></v-avatar>
+              Active
+            </v-chip>
+            <v-chip variant="text" size="small" class="px-0" v-else>
+              <v-avatar
+                size="8"
+                color="warning"
+                variant="flat"
+                class="mr-2"
+              ></v-avatar>
+              Offline
             </v-chip>
           </td>
         </tr>
@@ -56,13 +76,13 @@
 <script setup>
 import UiTitleCard from "@/components/UiTitleCard.vue";
 import { shallowRef } from "vue";
-const projects = shallowRef([
+const flows = shallowRef([
   {
     id: 1,
-    name: "Robot 123",
     source: "ORTHANC",
-    modality: "DX",
-    date: "2024-04-12",
+    neuralnetwork: "CNN-VGG16-PNEUMONIA",
+    output: "MEDICAL PANEL API",
+    status: "active",
   },
 ]);
 </script>

@@ -5,15 +5,16 @@ import UiTitleCard from "@/components/UiTitleCard.vue";
 
 const theme = useTheme();
 const InfoColor = theme.current.value.colors.info;
-const TextColor = theme.current.value.colors.primary;
+const TextColor = theme.current.value.colors['primary-darken-1'];
 
 const chartOptions1 = computed(() => {
+  console.log(theme.current.value.colors)
   return {
     chart: {
       type: "bar",
       height: 100,
       fontFamily: `inherit`,
-      foreColor: "white",
+      foreColor: TextColor,
       toolbar: {
         show: false,
       },
