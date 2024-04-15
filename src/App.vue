@@ -3,18 +3,25 @@
 // import SystemBar from "./components/SystemBar.vue";
 </script> -->
 <script setup>
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, onMounted, onBeforeMount } from "vue";
 import LeftMenu from "@/components/LeftMenu.vue";
-// const drawer = ref(null);
+import ThemeToogler from "@/components/ThemeToggler.vue";
+
+import { useTheme } from "vuetify";
+const theme = useTheme();
+
+onBeforeMount(() => {
+  console.log("THEME", theme.global);
+});
 onMounted(() => {
-  console.log("APP MOUNTED!")
+  console.log("APP MOUNTED!");
   // drawer.value = false;
 });
 </script>
 
 <script>
 export default {
-  data: () => ({drawer: false, ws: null, ws_status: false, client_id: null }),
+  data: () => ({ drawer: false, ws: null, ws_status: false, client_id: null }),
   methods: {
     closeLeftMenu() {
       console.log("CLOSE LEFT MENU");
@@ -70,30 +77,41 @@ export default {
       <template v-slot:image>
         <!-- to top right, rgba(19,84,122,.8), rgba(128,208,199,.8) -->
         <!-- background-image: linear-gradient(to right top, rgb(20 28 32), rgb(27 97 153 / 54%)); -->
-        <v-img
-          gradient="to right top, rgb(20 28 32), rgb(27 97 153 / 54%)"
-        ></v-img>
         <!-- <v-img
-          gradient="to right top, rgb(124 145 157), rgb(193 210 223)"
+          gradient="to right top, rgb(20 28 32), rgb(27 97 153 / 54%)"
         ></v-img> -->
+        <v-img
+          :gradient="
+            !theme.global.current.value.dark
+              ? 'to right top, rgb(124 145 157), rgb(193 210 223)'
+              : 'to right top, rgb(20 28 32), rgb(27 97 153 / 54%)'
+          "
+        ></v-img>
       </template>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <router-link
-        to="/dashboard"><v-img
-        width="42"
-        class="flex-grow-0 pa-0 ml-3"
-        src="./src/assets/aiflow_black.svg"
-      ></v-img></router-link>
+      <router-link to="/dashboard"
+        ><v-img
+          width="42"
+          class="flex-grow-0 pa-0 ml-3"
+          src="./src/assets/aiflow_black.svg"
+        ></v-img
+      ></router-link>
       <v-app-bar-title>AIHealth</v-app-bar-title>
       <v-spacer></v-spacer>
 
-      <v-btn icon>
+      <!-- <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      </v-btn> -->
+      <ThemeToogler />
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" temporary v-if="$route.path !== '/'" @closeLeftMenu="closeLeftMenu">
+    <v-navigation-drawer
+      v-model="drawer"
+      temporary
+      v-if="$route.path !== '/'"
+      @closeLeftMenu="closeLeftMenu"
+    >
       <!--  -->
       <LeftMenu />
     </v-navigation-drawer>
