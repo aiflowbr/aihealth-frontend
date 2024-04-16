@@ -1,13 +1,15 @@
 <template>
   <v-card class="flexcard d-flex" height="100%">
     <v-layout>
-      <v-navigation-drawer permanent location="right">
+      <v-navigation-drawer permanent location="right" v-click-outside="hideDrawer">
         <template v-slot:prepend>
           <!-- prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg" -->
           <v-list-item
+            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
             lines="two"
             title="Admin"
             subtitle="Logged in"
+            value="user"
             to="/user"
           >
             <template v-slot:prepend>
@@ -88,57 +90,16 @@
   </v-card>
 </template>
 
-<!-- <template>
-  <v-card>
-    <v-layout>
-      <v-navigation-drawer permanent location="right">
-        <template v-slot:prepend>
-          <v-list-item
-            lines="two"
-            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
-            title="Jane Smith"
-            subtitle="Logged in"
-          ></v-list-item>
-        </template>
-
-        <v-divider></v-divider>
-
-        <v-list density="compact" nav>
-          <v-list-item
-            prepend-icon="mdi-view-dashboard"
-            title="Dashboard"
-          ></v-list-item>
-          <v-list-item
-            prepend-icon="mdi-graph-outline"
-            title="Prediction flows"
-            value="prediction-flows"
-          ></v-list-item>
-          <v-list-item
-            prepend-icon="mdi-brain"
-            title="Neural networks"
-            value="networks"
-          ></v-list-item>
-          <v-list-item
-            prepend-icon="mdi-cog-outline"
-            title="Settings"
-            value="settings"
-          ></v-list-item>
-        </v-list>
-        <template v-slot:append>
-          <div class="pa-2">
-            <v-btn block> Logout </v-btn>
-          </div>
-        </template>
-      </v-navigation-drawer>
-      <v-main style="height: 250px"></v-main>
-    </v-layout>
-  </v-card>
-</template> -->
-
-<script setup></script>
+<script setup>
+</script>
 
 <script>
 export default {
   data: () => ({}),
+  methods: {
+    hideDrawer() {
+      console.log("CLICKED OUTSIDE")
+    }
+  }
 };
 </script>

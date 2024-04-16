@@ -6,9 +6,11 @@
 import { ref, watch, onMounted, onBeforeMount } from "vue";
 import LeftMenu from "@/components/LeftMenu.vue";
 import ThemeToogler from "@/components/ThemeToggler.vue";
+import { useLeftMenuStore } from "@/stores/leftmenu"
 
 import { useTheme } from "vuetify";
 const theme = useTheme();
+const leftMenuStore = useLeftMenuStore();
 
 onBeforeMount(() => {
   console.log("THEME", theme.global);
@@ -25,10 +27,10 @@ export default {
   methods: {
     closeLeftMenu() {
       console.log("CLOSE LEFT MENU");
-      this.drawer = false;
+      leftMenuStore.setLeftMenu(false);
     },
     connectWebSocket() {
-      var socket = new WebSocket("ws://localhost:9088/ws");
+      var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
 
       socket.onopen = (event) => {
         console.log("Conexão estabelecida com o servidor.");
@@ -88,15 +90,15 @@ export default {
           "
         ></v-img>
       </template>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"></v-app-bar-nav-icon>
 
-      <router-link to="/dashboard"
-        ><v-img
+      <router-link to="/dashboard">
+        <v-img
           width="42"
           class="flex-grow-0 pa-0 ml-3"
-          src="./src/assets/aiflow_black.svg"
-        ></v-img
-      ></router-link>
+          src="./src/assets/aiflow_black.svg">
+        </v-img>
+      </router-link>
       <v-app-bar-title>AIHealth</v-app-bar-title>
       <v-spacer></v-spacer>
 
@@ -107,10 +109,9 @@ export default {
     </v-app-bar>
 
     <v-navigation-drawer
-      v-model="drawer"
+      v-model="leftMenuStore.leftMenu"
       temporary
       v-if="$route.path !== '/'"
-      @closeLeftMenu="closeLeftMenu"
     >
       <!--  -->
       <LeftMenu />
