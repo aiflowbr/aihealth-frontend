@@ -6,7 +6,7 @@
 import { ref, watch, onMounted, onBeforeMount } from "vue";
 import LeftMenu from "@/components/LeftMenu.vue";
 import ThemeToogler from "@/components/ThemeToggler.vue";
-import { useLeftMenuStore } from "@/stores/leftmenu"
+import { useLeftMenuStore } from "@/stores/leftmenu";
 
 import { useTheme } from "vuetify";
 const theme = useTheme();
@@ -19,6 +19,9 @@ onMounted(() => {
   console.log("APP MOUNTED!");
   // drawer.value = false;
 });
+const updatedNavigation = () => {
+  console.log("UPDATED NAVIGATION");
+};
 </script>
 
 <script>
@@ -90,13 +93,16 @@ export default {
           "
         ></v-img>
       </template>
-      <v-app-bar-nav-icon @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"
+      ></v-app-bar-nav-icon>
 
       <router-link to="/dashboard">
         <v-img
           width="42"
           class="flex-grow-0 pa-0 ml-3"
-          src="./src/assets/aiflow_black.svg">
+          src="./src/assets/aiflow_black.svg"
+        >
         </v-img>
       </router-link>
       <v-app-bar-title>AIHealth</v-app-bar-title>

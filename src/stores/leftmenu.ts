@@ -1,9 +1,11 @@
+import LeftMenu from "@/components/LeftMenu.vue";
 import { defineStore } from "pinia";
 
 export const useLeftMenuStore = defineStore({
   id: "leftMenu",
   state: () => ({
-    leftMenu: localStorage.getItem("leftMenu") ? "true" == localStorage.getItem("leftMenu") : false,
+    // default closed
+    leftMenu: false,
   }),
   actions: {
     setLeftMenu(leftMenu) {

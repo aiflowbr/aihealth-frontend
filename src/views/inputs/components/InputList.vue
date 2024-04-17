@@ -29,14 +29,15 @@
       <tbody>
         <tr v-for="item in projects" :key="item.name">
           <td class="py-3">
-            <router-link
+            <!-- <router-link
               :to="'/inputs/' + item.id"
               class="text-primary link-hover"
-              >{{ item.id }}</router-link
-            >
+              > -->
+            {{ item.id }}
+            <!-- </router-link> -->
           </td>
           <td class="py-3">
-             {{ item.date }}
+            {{ item.date }}
           </td>
           <td class="py-3">{{ item.name }}</td>
           <td class="py-3 text-right" style="min-width: 100px">
@@ -44,7 +45,7 @@
           </td>
           <td class="py-3 text-right" style="min-width: 100px">
             <v-chip size="small">
-              {{ item.modality}}
+              {{ item.modality }}
             </v-chip>
           </td>
         </tr>
