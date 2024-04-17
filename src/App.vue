@@ -11,27 +11,12 @@ import { useLeftMenuStore } from "@/stores/leftmenu";
 import { useTheme } from "vuetify";
 const theme = useTheme();
 const leftMenuStore = useLeftMenuStore();
-
-onBeforeMount(() => {
-  console.log("THEME", theme.global);
-});
-onMounted(() => {
-  console.log("APP MOUNTED!");
-  // drawer.value = false;
-});
-const updatedNavigation = () => {
-  console.log("UPDATED NAVIGATION");
-};
 </script>
 
 <script>
 export default {
   data: () => ({ drawer: false, ws: null, ws_status: false, client_id: null }),
   methods: {
-    closeLeftMenu() {
-      console.log("CLOSE LEFT MENU");
-      leftMenuStore.setLeftMenu(false);
-    },
     connectWebSocket() {
       var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
 
@@ -103,9 +88,13 @@ export default {
           class="flex-grow-0 pa-0 ml-3"
           src="./src/assets/aiflow_black.svg"
         >
-        </v-img>
-      </router-link>
-      <v-app-bar-title>AIHealth</v-app-bar-title>
+        </v-img> </router-link
+      ><router-link to="/dashboard"></router-link>
+      <v-app-bar-title
+        style="cursor: pointer"
+        @click="$router.push('/dashboard')"
+        >AIHealth</v-app-bar-title
+      >
       <v-spacer></v-spacer>
 
       <!-- <v-btn icon>
