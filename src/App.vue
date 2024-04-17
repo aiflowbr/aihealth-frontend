@@ -70,31 +70,17 @@ export default {
         <!-- <v-img
           gradient="to right top, rgb(20 28 32), rgb(27 97 153 / 54%)"
         ></v-img> -->
-        <v-img
-          :gradient="
-            !theme.global.current.value.dark
-              ? 'to right top, rgb(124 145 157), rgb(193 210 223)'
-              : 'to right top, rgb(20 28 32), rgb(27 97 153 / 54%)'
-          "
-        ></v-img>
+        <v-img :gradient="!theme.global.current.value.dark
+          ? 'to right top, rgb(124 145 157), rgb(193 210 223)'
+          : 'to right top, rgb(20 28 32), rgb(27 97 153 / 54%)'
+          "></v-img>
       </template>
-      <v-app-bar-nav-icon
-        @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"></v-app-bar-nav-icon>
 
       <router-link to="/dashboard">
-        <v-img
-          width="42"
-          class="flex-grow-0 pa-0 ml-3"
-          src="./src/assets/aiflow_black.svg"
-        >
-        </v-img> </router-link
-      ><router-link to="/dashboard"></router-link>
-      <v-app-bar-title
-        style="cursor: pointer"
-        @click="$router.push('/dashboard')"
-        >AIHealth</v-app-bar-title
-      >
+        <v-img width="42" class="flex-grow-0 pa-0 ml-3" src="./src/assets/aiflow_black.svg">
+        </v-img> </router-link><router-link to="/dashboard"></router-link>
+      <v-app-bar-title style="cursor: pointer" @click="$router.push('/dashboard')">AIHealth</v-app-bar-title>
       <v-spacer></v-spacer>
 
       <!-- <v-btn icon>
@@ -103,11 +89,7 @@ export default {
       <ThemeToogler />
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="leftMenuStore.leftMenu"
-      temporary
-      v-if="$route.path !== '/'"
-    >
+    <v-navigation-drawer v-model="leftMenuStore.leftMenu" temporary v-if="$route.path !== '/'">
       <!--  -->
       <LeftMenu />
     </v-navigation-drawer>
@@ -129,9 +111,8 @@ export default {
         </v-row> -->
       </v-container>
     </v-main>
-    <v-footer app elevation="5" height="25" class="justify-center"
-      ><span class="text-subtitle-2">AIHealth 2024</span></v-footer
-    >
+    <v-footer app elevation="5" height="25" class="justify-center"><span class="text-subtitle-2">AIHealth
+        2024</span></v-footer>
   </v-app>
   <!-- <div>
     <a href="https://vitejs.dev" target="_blank">
@@ -148,15 +129,18 @@ export default {
 .bar_icon {
   width: 30px !important;
 }
+
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }

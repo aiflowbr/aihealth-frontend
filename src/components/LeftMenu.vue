@@ -4,35 +4,20 @@
       <v-navigation-drawer permanent location="right">
         <template v-slot:prepend>
           <!-- prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg" -->
-          <v-list-item
-            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
-            lines="two"
-            title="Admin"
-            subtitle="Logged in"
-            value="user"
-            to="/user"
-            :active="isActive({ to: '/user' })"
-          >
+          <v-list-item lines="two" title="Admin" subtitle="Logged in" value="user" to="/user"
+            :active="isActive({ to: '/user' })">
             <template v-slot:prepend>
               <v-avatar icon="mdi-account-circle"></v-avatar>
             </template>
           </v-list-item>
         </template>
         <v-list density="compact" nav>
-          <v-list-item
-            v-for="(item, index) in items"
-            :key="index"
-            :prepend-icon="item.icon"
-            :title="item.title"
-            :value="item.value"
-            :to="item.to"
-            :active="isActive(item)"
-          ></v-list-item>
+          <v-list-item v-for="(item, index) in items" :key="index" :prepend-icon="item.icon" :title="item.title"
+            :value="item.value" :to="item.to" :active="isActive(item)"></v-list-item>
         </v-list>
-
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block @click="logout"> Logout </v-btn>
+            <v-btn :prepend-icon="LogoutOutlined" block @click="logout"> Logout </v-btn>
           </div>
         </template>
       </v-navigation-drawer>
@@ -42,9 +27,9 @@
 </template>
 
 <script setup>
+import { LogoutOutlined } from "@ant-design/icons-vue";
 import { useRouter } from "vue-router";
 import { useLeftMenuStore } from "@/stores/leftmenu";
-
 const router = useRouter();
 const leftMenuStore = useLeftMenuStore();
 const logout = () => {
@@ -55,6 +40,7 @@ const logout = () => {
 </script>
 
 <script>
+// mdi-view-dashboard
 export default {
   data: () => ({
     items: [

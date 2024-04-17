@@ -14,7 +14,6 @@ import * as directives from "vuetify/directives";
 import { useThemeStore } from "@/stores/theme";
 
 const app = createApp(App);
-
 app.use(createPinia());
 app.use(
   createVuetify({
