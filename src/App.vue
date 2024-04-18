@@ -1,55 +1,52 @@
-<!-- <script setup>
-// import HelloWorld from './components/HelloWorld.vue'
-// import SystemBar from "./components/SystemBar.vue";
-</script> -->
 <script setup>
-import { ref, watch, onMounted, onBeforeMount } from "vue";
+import { ref, onMounted } from "vue";
 import LeftMenu from "@/components/LeftMenu.vue";
 import ThemeToogler from "@/components/ThemeToggler.vue";
 import { useLeftMenuStore } from "@/stores/leftmenu";
+import { useNodesStore } from "@/stores/nodes";
 
 import { useTheme } from "vuetify";
 const theme = useTheme();
 const leftMenuStore = useLeftMenuStore();
+const nodesStore = useNodesStore();
+const ws_status = ref(0)
+
+onMounted(() => {
+  console.log("Initializing communication");
+  globalThis.ws = connectWebSocket();
+})
+
+const connectWebSocket = () => {
+  var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
+  socket.onopen = (event) => {
+    console.log("Conexão estabelecida com o servidor.");
+    window.WSBACKEND = socket;
+    ws_status.value = true;
+  };
+
+  socket.onmessage = (event) => {
+    const msg = JSON.parse(event.data);
+    console.log("Mensagem recebida do servidor:", msg);
+    if (msg["input_nodes"]) {
+      nodesStore.setNodes(msg["input_nodes"])
+    }
+  };
+
+  socket.onerror = (error) => {
+    console.error("Erro na conexão:", error);
+  };
+
+  socket.onclose = (event) => {
+    console.log("Conexão fechada. Tentando reconectar em 1 segundo...");
+    ws_status.value = false;
+    setTimeout(connectWebSocket, 1000);
+  };
+
+  return socket;
+}
 </script>
 
-<script>
-export default {
-  data: () => ({ drawer: false, ws: null, ws_status: false, client_id: null }),
-  methods: {
-    connectWebSocket() {
-      var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
-
-      socket.onopen = (event) => {
-        console.log("Conexão estabelecida com o servidor.");
-        window.WSBACKEND = socket;
-        this.ws_status = true;
-      };
-
-      socket.onmessage = (event) => {
-        const msg = JSON.parse(event.data);
-        console.log("Mensagem recebida do servidor:", msg);
-      };
-
-      socket.onerror = (error) => {
-        console.error("Erro na conexão:", error);
-      };
-
-      socket.onclose = (event) => {
-        console.log("Conexão fechada. Tentando reconectar em 1 segundo...");
-        this.ws_status = false;
-        setTimeout(this.connectWebSocket, 1000);
-      };
-
-      return socket;
-    },
-  },
-  mounted() {
-    console.log("Initializing communication");
-    this.ws = this.connectWebSocket();
-  },
-};
-</script>
+<script></script>
 
 <template>
   <v-app id="AIHealth">

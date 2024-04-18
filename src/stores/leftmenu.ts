@@ -1,4 +1,3 @@
-import LeftMenu from "@/components/LeftMenu.vue";
 import { defineStore } from "pinia";
 
 export const useLeftMenuStore = defineStore({

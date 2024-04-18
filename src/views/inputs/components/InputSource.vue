@@ -1,9 +1,5 @@
 <template>
-  <UiTitleCard
-    title-icon="mdi-account"
-    title="DICOM server list"
-    class-name="px-0 pb-0 rounded-md"
-  >
+  <UiTitleCard title-icon="mdi-account" title="DICOM server list" class-name="px-0 pb-0 rounded-md">
     <template v-slot:actions>
       <!-- <v-btn color="success" size="x-small" style="padding-left: 1px; font-size: medium" icon="mdi-plus"></v-btn> -->
     </template>
@@ -22,22 +18,13 @@
           <th class="text-left text-caption font-weight-bold text-uppercase">
             AETitle
           </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
+          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
             Hostname
           </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 50px"
-          >
+          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 50px">
             Port
           </th>
-          <th
-            class="text-right text-caption font-weight-bold text-uppercase"
-            style="min-width: 100px"
-          >
+          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
             Interval (s)
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
@@ -46,7 +33,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in projects" :key="item.id">
+        <tr v-for="item in nodesStore.nodes" :key="item.id">
           <td class="py-3">
             <!-- <router-link
               :to="'/inputs/' + item.id"
@@ -68,21 +55,11 @@
           </td>
           <td class="py-3">
             <v-chip variant="text" size="small" class="px-0" v-if="item.status">
-              <v-avatar
-                size="8"
-                color="success"
-                variant="flat"
-                class="mr-2"
-              ></v-avatar>
+              <v-avatar size="8" color="success" variant="flat" class="mr-2"></v-avatar>
               Active
             </v-chip>
             <v-chip variant="text" size="small" class="px-0" v-else>
-              <v-avatar
-                size="8"
-                color="warning"
-                variant="flat"
-                class="mr-2"
-              ></v-avatar>
+              <v-avatar size="8" color="warning" variant="flat" class="mr-2"></v-avatar>
               Offline
             </v-chip>
           </td>
@@ -96,15 +73,18 @@
 import { ref, onMounted } from "vue";
 import UiTitleCard from "@/components/UiTitleCard.vue";
 import fetchWrapper from "@/utils/helpers/fetch-wrapper";
-const projects = ref([]);
+import { useNodesStore } from "@/stores/nodes";
+const nodesStore = useNodesStore();
+
+// const projects = ref([]);
 const addNode = () => {
   console.log("ADD");
 };
-onMounted(() => {
-  (async () => {
-    projects.value = await (
-      await fetchWrapper.get(import.meta.env.VITE_APP_BACKEND_PREFIX + "/nodes")
-    ).json();
-  })();
-});
+// onMounted(() => {
+//   (async () => {
+//     projects.value = await (
+//       await fetchWrapper.get(import.meta.env.VITE_APP_BACKEND_PREFIX + "/nodes")
+//     ).json();
+//   })();
+// });
 </script>
