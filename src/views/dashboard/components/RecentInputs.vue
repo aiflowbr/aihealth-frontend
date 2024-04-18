@@ -1,7 +1,11 @@
 <template>
-  <UiTitleCard title="Recent Images" class-name="px-0 pb-0 rounded-md">
+  <UiTitleCard
+    title="Recent Images"
+    title-icon="mdi-history"
+    class-name="px-0 pb-0 rounded-md"
+  >
     <v-table class="bordered-table" hover density="comfortable">
-      <thead class="bg-containerBg">
+      <thead>
         <tr>
           <th class="text-left text-caption font-weight-bold text-uppercase">
             ID
@@ -73,6 +77,20 @@
               ></v-avatar>
               Processed
             </v-chip>
+            <v-chip
+              variant="text"
+              size="small"
+              class="px-0"
+              v-else-if="item.priority === 'ignored'"
+            >
+              <v-avatar
+                size="8"
+                color="success"
+                variant="flat"
+                class="mr-2"
+              ></v-avatar>
+              Ignored
+            </v-chip>
             <v-chip variant="text" size="small" class="px-0" v-else>
               <v-avatar
                 size="8"
@@ -106,62 +124,6 @@ const projects = shallowRef([
     name: "Robot 9",
     flows: "1",
     priority: "pending",
-  },
-  {
-    number: 84564564,
-    modality: "DX",
-    name: "Robot 8",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 86739658,
-    modality: "DX",
-    name: "Robot 7",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 98652366,
-    modality: "DX",
-    name: "Robot 6",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 98753263,
-    modality: "DX",
-    name: "Robot 5",
-    flows: "1",
-    priority: "error",
-  },
-  {
-    number: 98753275,
-    modality: "DX",
-    name: "Robot 4",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 98753291,
-    modality: "DX",
-    name: "Robot 3",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 98756325,
-    modality: "DX",
-    name: "Robot 2",
-    flows: "1",
-    priority: "processed",
-  },
-  {
-    number: 98764564,
-    modality: "DX",
-    name: "Robot 1",
-    flows: "1",
-    priority: "processed",
   },
 ]);
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <UiTitleCard title-icon="mdi-account" title="DICOM server list" class-name="px-0 pb-0 rounded-md">
+  <UiTitleCard
+    title-icon="mdi-account"
+    title="DICOM server list"
+    class-name="px-0 pb-0 rounded-md"
+  >
     <template v-slot:actions>
       <!-- <v-btn color="success" size="x-small" style="padding-left: 1px; font-size: medium" icon="mdi-plus"></v-btn> -->
     </template>
@@ -7,9 +11,7 @@
       <template v-slot:top>
         <v-toolbar flat density="compact">
           <v-spacer></v-spacer>
-          <v-btn prepend-icon="mdi-plus" @click="addNode">
-            Adicionar
-          </v-btn>
+          <v-btn prepend-icon="mdi-plus" @click="addNode"> Adicionar </v-btn>
         </v-toolbar>
       </template>
       <thead>
@@ -20,13 +22,22 @@
           <th class="text-left text-caption font-weight-bold text-uppercase">
             AETitle
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
             Hostname
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 50px">
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 50px"
+          >
             Port
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
+          <th
+            class="text-right text-caption font-weight-bold text-uppercase"
+            style="min-width: 100px"
+          >
             Interval (s)
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
@@ -57,11 +68,21 @@
           </td>
           <td class="py-3">
             <v-chip variant="text" size="small" class="px-0" v-if="item.status">
-              <v-avatar size="8" color="success" variant="flat" class="mr-2"></v-avatar>
+              <v-avatar
+                size="8"
+                color="success"
+                variant="flat"
+                class="mr-2"
+              ></v-avatar>
               Active
             </v-chip>
             <v-chip variant="text" size="small" class="px-0" v-else>
-              <v-avatar size="8" color="warning" variant="flat" class="mr-2"></v-avatar>
+              <v-avatar
+                size="8"
+                color="warning"
+                variant="flat"
+                class="mr-2"
+              ></v-avatar>
               Offline
             </v-chip>
           </td>
@@ -75,17 +96,15 @@
 import { ref, onMounted } from "vue";
 import UiTitleCard from "@/components/UiTitleCard.vue";
 import fetchWrapper from "@/utils/helpers/fetch-wrapper";
-const projects = ref([])
+const projects = ref([]);
 const addNode = () => {
-  console.log("ADD")
-}
+  console.log("ADD");
+};
 onMounted(() => {
   (async () => {
     projects.value = await (
-      await fetchWrapper.get(
-        import.meta.env.VITE_APP_BACKEND_PREFIX + "/nodes"
-      )
+      await fetchWrapper.get(import.meta.env.VITE_APP_BACKEND_PREFIX + "/nodes")
     ).json();
-  })()
-})
+  })();
+});
 </script>

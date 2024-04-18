@@ -70,6 +70,7 @@ const barChart1 = {
 
 <template>
   <UiTitleCard
+    title-icon="mdi-calendar"
     title="Week statistics"
     class-name="pt-5 px-0 rounded-md overflow-hidden"
   >
