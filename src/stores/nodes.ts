@@ -10,5 +10,12 @@ export const useNodesStore = defineStore({
       this.nodes = nodes;
       localStorage.setItem("nodes", JSON.stringify(nodes));
     },
+    setOffline() {
+      if (this.nodes && Array.isArray(this.nodes)) {
+        this.nodes.forEach((e) => {
+          e.status = false;
+        })
+      }
+    }
   },
 });

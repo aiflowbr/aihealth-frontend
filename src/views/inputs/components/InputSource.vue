@@ -7,7 +7,8 @@
       <template v-slot:top>
         <v-toolbar flat density="compact">
           <v-spacer></v-spacer>
-          <v-btn prepend-icon="mdi-plus" @click="addNode"> Adicionar </v-btn>
+          <!-- <v-btn prepend-icon="mdi-plus" @click="addNode"> Adicionar </v-btn> -->
+          <SourceForm />
         </v-toolbar>
       </template>
       <thead>
@@ -18,17 +19,20 @@
           <th class="text-left text-caption font-weight-bold text-uppercase">
             AETitle
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
+          <th class="text-left text-caption font-weight-bold text-uppercase" style="min-width: 100px">
             Hostname
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 50px">
+          <th class="text-left text-caption font-weight-bold text-uppercase" style="min-width: 50px">
             Port
           </th>
-          <th class="text-right text-caption font-weight-bold text-uppercase" style="min-width: 100px">
+          <th class="text-left text-caption font-weight-bold text-uppercase" style="min-width: 100px">
             Interval (s)
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
             Status
+          </th>
+          <th class="text-center text-caption font-weight-bold text-uppercase">
+            Actions
           </th>
         </tr>
       </thead>
@@ -42,13 +46,13 @@
             <!-- </router-link> -->
           </td>
           <td class="py-3">{{ item.aetitle }}</td>
-          <td class="py-3 text-right" style="min-width: 100px">
+          <td class="py-3" style="min-width: 100px">
             {{ item.address }}
           </td>
-          <td class="py-3 text-right" style="min-width: 100px">
+          <td class="py-3" style="min-width: 100px">
             {{ item.port }}
           </td>
-          <td class="py-3 text-right" style="min-width: 100px">
+          <td class="py-3" style="min-width: 100px">
             <v-chip size="small">
               {{ item.fetch_interval }}
             </v-chip>
@@ -63,6 +67,14 @@
               Offline
             </v-chip>
           </td>
+          <td class="py-3 text-center">
+            <v-icon class="me-2" size="small" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon size="small" @click="deleteItem(item)">
+              mdi-delete
+            </v-icon>
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -70,15 +82,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+// import { ref, onMounted } from "vue";
 import UiTitleCard from "@/components/UiTitleCard.vue";
+import SourceForm from "./SourceForm.vue"
 import fetchWrapper from "@/utils/helpers/fetch-wrapper";
 import { useNodesStore } from "@/stores/nodes";
 const nodesStore = useNodesStore();
 
 // const projects = ref([]);
-const addNode = () => {
-  console.log("ADD");
+const editItem = () => {
+  console.log("EDIT");
+};
+const deleteItem = () => {
+  console.log("DELETE");
 };
 // onMounted(() => {
 //   (async () => {

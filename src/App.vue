@@ -17,6 +17,7 @@ onMounted(() => {
 })
 
 const connectWebSocket = () => {
+  nodesStore.setOffline();
   var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
   socket.onopen = (event) => {
     console.log("Conexão estabelecida com o servidor.");
@@ -123,7 +124,7 @@ const connectWebSocket = () => {
 </template>
 
 <style scoped>
-.bar_icon {
+/* .bar_icon {
   width: 30px !important;
 }
 
@@ -140,5 +141,11 @@ const connectWebSocket = () => {
 
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+} */
+</style>
+<style>
+.v-overlay__scrim {
+  background: black !important;
+  opacity: 0.45 !important;
 }
 </style>
