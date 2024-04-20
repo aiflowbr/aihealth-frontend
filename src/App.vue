@@ -9,12 +9,12 @@ import { useTheme } from "vuetify";
 const theme = useTheme();
 const leftMenuStore = useLeftMenuStore();
 const nodesStore = useNodesStore();
-const ws_status = ref(0)
+const ws_status = ref(0);
 
 onMounted(() => {
   console.log("Initializing communication");
   globalThis.ws = connectWebSocket();
-})
+});
 
 const connectWebSocket = () => {
   nodesStore.setOffline();
@@ -29,7 +29,7 @@ const connectWebSocket = () => {
     const msg = JSON.parse(event.data);
     console.log("Mensagem recebida do servidor:", msg);
     if (msg["input_nodes"]) {
-      nodesStore.setNodes(msg["input_nodes"])
+      nodesStore.setNodes(msg["input_nodes"]);
     }
   };
 
@@ -44,7 +44,7 @@ const connectWebSocket = () => {
   };
 
   return socket;
-}
+};
 </script>
 
 <script></script>
@@ -68,17 +68,31 @@ const connectWebSocket = () => {
         <!-- <v-img
           gradient="to right top, rgb(20 28 32), rgb(27 97 153 / 54%)"
         ></v-img> -->
-        <v-img :gradient="!theme.global.current.value.dark
-          ? 'to right top, rgb(124 145 157), rgb(193 210 223)'
-          : 'to right top, rgb(20 28 32), rgb(27 97 153 / 54%)'
-          "></v-img>
+        <v-img
+          :gradient="
+            !theme.global.current.value.dark
+              ? 'to right top, rgb(124 145 157), rgb(193 210 223)'
+              : 'to right top, rgb(20 28 32), rgb(27 97 153 / 54%)'
+          "
+        ></v-img>
       </template>
-      <v-app-bar-nav-icon @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon
+        @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"
+      ></v-app-bar-nav-icon>
 
       <router-link to="/dashboard">
-        <v-img width="42" class="flex-grow-0 pa-0 ml-3" src="./src/assets/aiflow_black.svg">
-        </v-img> </router-link><router-link to="/dashboard"></router-link>
-      <v-app-bar-title style="cursor: pointer" @click="$router.push('/dashboard')">AIHealth</v-app-bar-title>
+        <v-img
+          width="42"
+          class="flex-grow-0 pa-0 ml-3"
+          src="./src/assets/aiflow_black.svg"
+        >
+        </v-img> </router-link
+      ><router-link to="/dashboard"></router-link>
+      <v-app-bar-title
+        style="cursor: pointer"
+        @click="$router.push('/dashboard')"
+        >AIHealth</v-app-bar-title
+      >
       <v-spacer></v-spacer>
 
       <!-- <v-btn icon>
@@ -87,7 +101,11 @@ const connectWebSocket = () => {
       <ThemeToogler />
     </v-app-bar>
 
-    <v-navigation-drawer v-model="leftMenuStore.leftMenu" temporary v-if="$route.path !== '/'">
+    <v-navigation-drawer
+      v-model="leftMenuStore.leftMenu"
+      temporary
+      v-if="$route.path !== '/'"
+    >
       <!--  -->
       <LeftMenu />
     </v-navigation-drawer>
@@ -109,8 +127,9 @@ const connectWebSocket = () => {
         </v-row> -->
       </v-container>
     </v-main>
-    <v-footer app elevation="5" height="25" class="justify-center"><span class="text-subtitle-2">AIHealth
-        2024</span></v-footer>
+    <v-footer app elevation="5" height="25" class="justify-center"
+      ><span class="text-subtitle-2">AIHealth 2024</span></v-footer
+    >
   </v-app>
   <!-- <div>
     <a href="https://vitejs.dev" target="_blank">
