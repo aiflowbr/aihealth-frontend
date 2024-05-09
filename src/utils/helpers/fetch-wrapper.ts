@@ -7,7 +7,14 @@ export const fetchWrapper = {
   delete: request("DELETE"),
 };
 
-function request(method: string) {
+export const fetchAPIWrapper = {
+  get: request("GET", import.meta.env.VITE_APP_BACKEND_PREFIX),
+  post: request("POST", import.meta.env.VITE_APP_BACKEND_PREFIX),
+  put: request("PUT", import.meta.env.VITE_APP_BACKEND_PREFIX),
+  delete: request("DELETE", import.meta.env.VITE_APP_BACKEND_PREFIX),
+};
+
+function request(method: string, prefix: string = "") {
   return (url: string, body?: object) => {
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const requestOptions: any = {
@@ -15,10 +22,17 @@ function request(method: string) {
       headers: authHeader(url),
     };
     if (body) {
-      requestOptions.headers["Content-Type"] = "application/json";
-      requestOptions.body = JSON.stringify(body);
+      console.log("BODY:");
+      if (body instanceof FormData) {
+        console.log("BODY:");
+        requestOptions.body = body;
+        console.log(requestOptions);
+      } else {
+        requestOptions.headers["Content-Type"] = "application/json";
+        requestOptions.body = JSON.stringify(body);
+      }
     }
-    return fetch(url, requestOptions); //.then(handleResponse);
+    return fetch(prefix + url, requestOptions); //.then(handleResponse);
   };
 }
 
