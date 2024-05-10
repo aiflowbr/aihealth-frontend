@@ -22,11 +22,8 @@ function request(method: string, prefix: string = "") {
       headers: authHeader(url),
     };
     if (body) {
-      console.log("BODY:");
       if (body instanceof FormData) {
-        console.log("BODY:");
         requestOptions.body = body;
-        console.log(requestOptions);
       } else {
         requestOptions.headers["Content-Type"] = "application/json";
         requestOptions.body = JSON.stringify(body);
@@ -41,10 +38,10 @@ function request(method: string, prefix: string = "") {
 function authHeader(url: string) {
   // return auth header with jwt if user is logged in and request is to the api url
   const { user } = useAuthStore();
-  const isLoggedIn = !!user?.token;
+  const isLoggedIn = !!user?.access_token;
   const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
   if (isLoggedIn && isApiUrl) {
-    return { Authorization: `Bearer ${user.token}` };
+    return { Authorization: `Bearer ${user.access_token}` };
   } else {
     return {};
   }

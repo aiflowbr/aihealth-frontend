@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { router } from "@/router";
-import { fetchWrapper } from "@/utils/helpers/fetch-wrapper";
+import { fetchAPIWrapper } from "@/utils/helpers/fetch-wrapper";
 
 const baseUrl = `${import.meta.env.VITE_API_URL}/users`;
 
@@ -11,11 +11,16 @@ export const useAuthStore = defineStore({
     /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
     // @ts-ignore
     user: JSON.parse(localStorage.getItem("user")),
+    user_info: localStorage.getItem("user_info") || {},
     returnUrl: null,
   }),
   actions: {
+    setUser(user) {
+      this.user = user;
+      localStorage.setItem("user", JSON.stringify(user));
+    },
     async login(username: string, password: string) {
-      const user = await fetchWrapper.post(`${baseUrl}/authenticate`, {
+      const user = await fetchAPIWrapper.post("/authenticate", {
         username,
         password,
       });
