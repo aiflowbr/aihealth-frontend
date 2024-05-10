@@ -7,20 +7,33 @@
             ID
           </th>
           <th class="text-left text-caption font-weight-bold text-uppercase">
+            Name
+          </th>
+          <th class="text-left text-caption font-weight-bold text-uppercase">
             Username
+          </th>
+          <th class="text-left text-caption font-weight-bold text-uppercase">
+            E-mail
+          </th>
+          <th class="text-center text-caption font-weight-bold text-uppercase">
+            Actions
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in flows" :key="item.id">
-          <td class="py-3">
-            <router-link
-              :to="'/flows/' + item.id"
-              class="text-primary link-hover"
-              >{{ item.id }}</router-link
-            >
-          </td>
+        <tr v-for="item in accounts" :key="item.id">
+          <td class="py-3">{{ item.id }}</td>
+          <td class="py-3">{{ item.name }}</td>
           <td class="py-3">{{ item.username }}</td>
+          <td class="py-3">{{ item.mail }}</td>
+          <td class="py-3 text-center">
+            <v-icon class="me-2" size="small" @click="editItem(item)">
+              mdi-pencil
+            </v-icon>
+            <v-icon size="small" @click="deleteItem(item)">
+              mdi-delete
+            </v-icon>
+          </td>
         </tr>
       </tbody>
     </v-table>
@@ -29,14 +42,19 @@
 
 <script setup>
 import UiTitleCard from "@/components/UiTitleCard.vue";
-import { shallowRef } from "vue";
-const flows = shallowRef([
-  {
-    id: 1,
-    source: "ORTHANC",
-    neuralnetwork: "CNN-VGG16-PNEUMONIA",
-    output: "MEDICAL PANEL API",
-    status: "active",
-  },
-]);
+import { shallowRef, onMounted, getCurrentInstance } from "vue";
+const accounts = shallowRef([]);
+onMounted(() => {
+  const instance = getCurrentInstance();
+  if (instance) {
+    const api = instance.appContext.config.globalProperties.$api;
+    api.get("/users").then((json) => { console.log(json); accounts.value = json; });
+  }
+});
+const editItem = (item) => {
+  console.log(item);
+};
+const deleteItem = (item) => {
+  console.log(item);
+};
 </script>

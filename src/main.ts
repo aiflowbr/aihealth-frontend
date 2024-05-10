@@ -12,6 +12,7 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { useThemeStore } from "@/stores/theme";
+import apiPlugin from "@/utils/helpers/fetch-wrapper";
 
 const app = createApp(App);
 app.use(createPinia());
@@ -24,6 +25,7 @@ app.use(
     directives,
   })
 );
+app.use(apiPlugin);
 
 // app.use(vuetify); //.mount('#app')
 app.use(router);

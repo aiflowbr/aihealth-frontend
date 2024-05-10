@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
+import type { App } from "vue";
 
 export const fetchWrapper = {
   get: request("GET"),
@@ -23,7 +24,7 @@ function request(
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const requestOptions: any = {
       method,
-      headers: authHeader(url),
+      headers: authHeader(prefix + url),
     };
     if (body) {
       if (body instanceof FormData) {
@@ -48,12 +49,11 @@ function request(
 }
 
 // helper functions
-
 function authHeader(url: string) {
   // return auth header with jwt if user is logged in and request is to the api url
   const { token } = useAuthStore();
   const isLoggedIn = !!token;
-  const isApiUrl = url.startsWith(import.meta.env.VITE_API_URL);
+  const isApiUrl = url.startsWith(import.meta.env.VITE_APP_BACKEND_PREFIX);
   if (isLoggedIn && isApiUrl) {
     return { Authorization: `Bearer ${token}` };
   } else {
@@ -86,4 +86,8 @@ function handleResponse(response: any) {
   });
 }
 
-export default fetchWrapper;
+export default {
+  install(app: App, options?: any) {
+    app.config.globalProperties.$api = fetchAPIWrapper;
+  },
+};

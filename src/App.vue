@@ -1,19 +1,30 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, getCurrentInstance } from "vue";
 import LeftMenu from "@/components/LeftMenu.vue";
 import ThemeToogler from "@/components/ThemeToggler.vue";
 import { useLeftMenuStore } from "@/stores/leftmenu";
 import { useNodesStore } from "@/stores/nodes";
+import { useAuthStore } from "@/stores/auth";
 
 import { useTheme } from "vuetify";
 const theme = useTheme();
 const leftMenuStore = useLeftMenuStore();
 const nodesStore = useNodesStore();
+const authStore = useAuthStore();
 const ws_status = ref(0);
 
 onMounted(() => {
   console.log("Initializing communication");
   globalThis.ws = connectWebSocket();
+  const instance = getCurrentInstance();
+  if (instance) {
+    const api = instance.appContext.config.globalProperties.$api;
+    setInterval(() => {
+      api.get("/users/renew").then((json) => {
+        authStore.setToken(json.access_token);
+      });
+    }, 60 * 1000);
+  }
 });
 
 const connectWebSocket = () => {
