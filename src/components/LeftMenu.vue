@@ -29,11 +29,14 @@
 <script setup>
 import { LogoutOutlined } from "@ant-design/icons-vue";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 import { useLeftMenuStore } from "@/stores/leftmenu";
 const router = useRouter();
 const leftMenuStore = useLeftMenuStore();
+const authStore = useAuthStore();
 const logout = () => {
   leftMenuStore.setLeftMenu(false);
+  authStore.logout();
   console.log(leftMenuStore);
   router.push("/");
 };
