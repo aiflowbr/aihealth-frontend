@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, getCurrentInstance } from "vue";
+import { ref, onMounted, getCurrentInstance, computed } from "vue";
+import { useRoute } from "vue-router";
 import LeftMenu from "@/components/LeftMenu.vue";
 import ThemeToogler from "@/components/ThemeToggler.vue";
 import { useLeftMenuStore } from "@/stores/leftmenu";
@@ -29,7 +30,11 @@ onMounted(() => {
 
 const connectWebSocket = () => {
   nodesStore.setOffline();
-  var socket = new WebSocket("ws://" + location.hostname + ":9088/ws");
+  var backendBase = import.meta.env.VITE_APP_BACKEND_PREFIX;
+  var wsBase = backendBase.replace(/^http(s)?:/i, (match) => {
+    return match.toLowerCase() === "https:" ? "wss:" : "ws:";
+  });
+  var socket = new WebSocket(wsBase + "/ws");
   socket.onopen = (event) => {
     console.log("Conexão estabelecida com o servidor.");
     window.WSBACKEND = socket;
@@ -53,9 +58,12 @@ const connectWebSocket = () => {
     ws_status.value = false;
     setTimeout(connectWebSocket, 1000);
   };
-
   return socket;
 };
+const isTokenExpired = computed(() => {
+  const currentRoute = useRoute();
+  return authStore.token == null && currentRoute.path !== "/";
+});
 </script>
 
 <script></script>
@@ -90,7 +98,6 @@ const connectWebSocket = () => {
       <v-app-bar-nav-icon
         @click="leftMenuStore.setLeftMenu(!leftMenuStore.leftMenu)"
       ></v-app-bar-nav-icon>
-
       <router-link to="/dashboard">
         <v-img
           width="42"
@@ -120,9 +127,24 @@ const connectWebSocket = () => {
       <!--  -->
       <LeftMenu />
     </v-navigation-drawer>
-
     <v-main class="d-flex">
-      <InflowData />
+      <v-dialog
+        v-model="isTokenExpired"
+        persistent="persistent"
+        max-width="500"
+      >
+        <v-card>
+          <v-card-title>Sessão Expirada</v-card-title>
+          <v-card-text>
+            Sua sessão expirou. Por favor, faça login novamente.
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" text @click="$router.push('/')">
+              Fazer Login
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       <v-container class="d-flex">
         <router-view></router-view>
         <!-- <v-row>
@@ -174,6 +196,11 @@ const connectWebSocket = () => {
 } */
 </style>
 <style>
+/* .dialog-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
 .v-overlay__scrim {
   background: black !important;
   opacity: 0.45 !important;

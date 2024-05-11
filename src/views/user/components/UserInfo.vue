@@ -31,7 +31,25 @@
         </div>
       </v-card-text>
       <v-card-actions>
-        <v-btn text="Change password" block border @click="reserve"></v-btn>
+        <v-dialog max-width="500">
+          <template v-slot:activator="{ props: activatorProps }">
+            <v-btn v-bind="activatorProps" text="Change Password"></v-btn>
+          </template>
+
+          <template v-slot:default="{ isActive }">
+            <v-card title="Change password">
+              <v-card-text>
+                <ChangePassword />
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn text="Close" @click="isActive.value = false"></v-btn>
+              </v-card-actions>
+            </v-card>
+          </template>
+        </v-dialog>
       </v-card-actions>
     </v-card>
   </UiTitleCard>
@@ -40,6 +58,7 @@
 <script setup>
 import { shallowRef, ref, getCurrentInstance } from "vue";
 import UiTitleCard from "@/components/UiTitleCard.vue";
+import ChangePassword from "@/components/ChangePassword.vue";
 const userInfo = ref({});
 const instance = getCurrentInstance();
 if (instance) {
@@ -49,4 +68,7 @@ if (instance) {
     userInfo.value = json;
   });
 }
+const reserve = () => {
+  console.log("CHANGE PASSWORD");
+};
 </script>

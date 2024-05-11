@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { router } from "@/router";
+import { inject } from "vue";
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
@@ -17,7 +18,7 @@ export const useAuthStore = defineStore({
     logout() {
       this.token = null;
       localStorage.removeItem("token");
-      router.push("/auth/login");
+      // router.push("/");
     },
   },
 });

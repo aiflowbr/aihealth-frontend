@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
+import { inject } from "vue";
 import type { App } from "vue";
 
 export const fetchWrapper = {
