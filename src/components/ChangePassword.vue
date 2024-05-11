@@ -33,7 +33,7 @@
           variant="elevated"
           block
         >
-          Sign In
+          Change password
         </v-btn>
       </v-form>
     </v-card>
