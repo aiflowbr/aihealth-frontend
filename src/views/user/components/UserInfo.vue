@@ -2,9 +2,9 @@
   <UiTitleCard
     title="User information"
     title-icon="mdi-account"
-    class-name="px-0 pb-0 rounded-md"
+    class-name="rounded-md"
   >
-    <v-card max-width="350">
+    <v-card max-width="350" elevation="5">
       <template v-slot:loader="{ isActive }">
         <v-progress-linear
           :active="isActive"
