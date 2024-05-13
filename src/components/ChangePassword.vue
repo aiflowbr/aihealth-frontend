@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card class="mx-auto px-6 py-8" max-width="344">
+    <v-card>
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model="old_password"
@@ -27,7 +27,6 @@
         <v-btn
           :disabled="!form"
           :loading="loading"
-          color="success"
           size="large"
           type="submit"
           variant="elevated"
@@ -43,7 +42,7 @@
 export default {
   data: () => ({
     form: false,
-    email: null,
+    old_password: null,
     password: null,
     loading: false,
   }),
@@ -51,10 +50,19 @@ export default {
   methods: {
     onSubmit() {
       if (!this.form) return;
-
       this.loading = true;
-
-      setTimeout(() => (this.loading = false), 2000);
+      this.$api
+        .put("/users/1", {
+          old_password: this.old_password,
+          password: this.password,
+        })
+        .then((json) => {
+          console.log(json);
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+      //   setTimeout(() => (this.loading = false), 2000);
     },
     required(v) {
       return !!v || "Field is required";
