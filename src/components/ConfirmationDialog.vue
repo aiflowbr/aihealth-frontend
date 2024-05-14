@@ -1,15 +1,18 @@
 <template>
-  <div>
-    <v-card>
-      <v-card-title>{{ title }}</v-card-title>
-      <v-card-text>{{ message }}</v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="green darken-1" text @click="cancelAction">Cancel</v-btn>
-        <v-btn color="red darken-1" text @click="confirmAction">Confirm</v-btn>
-      </v-card-actions>
-    </v-card>
-  </div>
+  <v-card :title="title">
+    <v-card-text>{{ message }}</v-card-text>
+    <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn class="mr-2 mb-2" @click="cancelAction">
+        Cancel
+        <v-icon icon="mdi-cancel" end></v-icon>
+      </v-btn>
+      <v-btn class="mr-4 mb-2" color="red" @click="confirmAction">
+        Confirm
+        <v-icon icon="mdi-checkbox-marked-circle" end></v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script setup>

@@ -13,7 +13,7 @@
         </v-row>
       </v-col>
     </v-row>
-  </v-container class="pa-0">
+  </v-container>
 </template>
 <script setup>
 import InputList from "./components/InputList.vue";

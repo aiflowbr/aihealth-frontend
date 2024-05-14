@@ -45,7 +45,11 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
 
-                <v-btn text="Close" @click="isActive.value = false"></v-btn>
+                <v-btn
+                  text="Close"
+                  class="mr-4 mb-2"
+                  @click="isActive.value = false"
+                ></v-btn>
               </v-card-actions>
             </v-card>
           </template>

@@ -50,11 +50,11 @@
                   <v-card-text>
                     <ChangePassword :user-id="item.id" />
                   </v-card-text>
-
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn
                       text="Close"
+                      class="mr-4 mb-2"
                       v-if="editPassword"
                       @click="isActive.value = false"
                     ></v-btn>
@@ -63,7 +63,7 @@
                 <ConfirmationDialog
                   v-if="!editPassword"
                   title="Confirm deletion?"
-                  message="confirm to delete account number x"
+                  :message="`confirm to delete account “${item.username}”`"
                   @confirm="confirmDelete(item)"
                   @cancel="isActive.value = false"
                 />

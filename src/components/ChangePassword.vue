@@ -1,61 +1,60 @@
 <template>
   <div>
-    <v-card>
-      <v-form v-model="form" @submit.prevent="onSubmit">
-        <v-text-field
-          v-model="old_password"
-          :readonly="loading"
-          :rules="[required]"
-          label="Current password"
-          placeholder="Enter your password"
-          type="password"
-          clearable
-        ></v-text-field>
+    <v-form v-model="form" @submit.prevent="onSubmit">
+      <v-text-field
+        v-model="old_password"
+        :readonly="loading"
+        :rules="[required]"
+        label="Current password"
+        placeholder="Enter your password"
+        type="password"
+        clearable
+      ></v-text-field>
 
-        <v-text-field
-          v-model="password"
-          :readonly="loading"
-          :rules="[required]"
-          class="mb-3"
-          label="New Password"
-          placeholder="Enter your password"
-          type="password"
-          clearable
-        ></v-text-field>
+      <v-text-field
+        v-model="password"
+        :readonly="loading"
+        :rules="[required]"
+        class="mb-3"
+        label="New Password"
+        placeholder="Enter your password"
+        type="password"
+        clearable
+      ></v-text-field>
 
-        <v-alert
-          v-show="error"
-          color="rgba(255,0,0,0.15)"
-          icon="$error"
-          title="Error"
-          density="compact"
-          class="mb-4 mt-0"
-          border="start"
-          :text="error_text"
-        ></v-alert>
-        <v-alert
-          v-show="success"
-          color="rgba(0,200,100,0.15)"
-          icon="$success"
-          title="Info"
-          density="compact"
-          class="mb-4 mt-0"
-          border="start"
-          :text="success_text"
-        ></v-alert>
+      <v-alert
+        v-show="error"
+        color="rgba(255,0,0,0.15)"
+        icon="$error"
+        title="Error"
+        density="compact"
+        class="mb-4 mt-0"
+        border="start"
+        :text="error_text"
+      ></v-alert>
+      <v-alert
+        v-show="success"
+        color="rgba(0,200,100,0.15)"
+        icon="$success"
+        title="Info"
+        density="compact"
+        class="mb-4 mt-0"
+        border="start"
+        :text="success_text"
+      ></v-alert>
 
-        <v-btn
-          :disabled="!form"
-          :loading="loading"
-          size="large"
-          type="submit"
-          variant="elevated"
-          block
-        >
-          Change password
-        </v-btn>
-      </v-form>
-    </v-card>
+      <v-btn
+        :disabled="!form"
+        :loading="loading"
+        size="large"
+        type="submit"
+        variant="elevated"
+        color="primary"
+        block
+      >
+        Change password
+      </v-btn>
+    </v-form>
   </div>
 </template>
 <script setup>
